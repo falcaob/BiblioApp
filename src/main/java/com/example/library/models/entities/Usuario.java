@@ -35,25 +35,14 @@ public class Usuario implements Serializable {
 	@Size(min = 3, max = 15)
 	private String apellido;
 	
-	@Column(name = "create_at")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull
-	private LocalDate fechaNacimiento;
-	
 	@NotEmpty
 	@Email
 	private String email;
 	
-	/*
-	private List<Libro> libros;
-	
-	@ManyToMany
-    @JoinTable(
-        name = "usuario_libro",
-        joinColumns = @JoinColumn(name = "usuario_id"),
-        inverseJoinColumns = @JoinColumn(name = "libro_id")
-    )
-	*/
+	@Column(name = "create_at")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull
+	private LocalDate fechaNacimiento;
 	
 	
 	// getters and setters

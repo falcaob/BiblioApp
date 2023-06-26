@@ -36,10 +36,6 @@ public class Libro implements Serializable {
 	@Size(min = 3, max = 15)
 	private String genero;
 	
-	@NotEmpty
-	@Size(min = 3, max = 10)
-	private Long ISBN;
-	
 	
 	// getters y setters
 	
@@ -85,14 +81,6 @@ public class Libro implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public Long getISBN() {
-		return ISBN;
-	}
-
-	public void setISBN(Long iSBN) {
-		ISBN = iSBN;
 	}
 
 }
