@@ -16,6 +16,6 @@ public interface LibroService {
 	
 	void delete(Long id);
 	
-	void delete(Libro libro);
+	void save(Libro libro);
 
 }

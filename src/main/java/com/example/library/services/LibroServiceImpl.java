@@ -2,47 +2,54 @@ package com.example.library.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.example.library.models.dao.LibroDao;
 import com.example.library.models.entities.Libro;
 
 @Service
 public class LibroServiceImpl implements LibroService {
+	
+	@Autowired
+	LibroDao libroDao;
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Libro> listar() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<Libro>) libroDao.findAll();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Libro findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		// Optional
+		return libroDao.findById(id).orElse(null);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Libro> findByGenero(String genero) {
-		// TODO Auto-generated method stub
-		return null;
+		return libroDao.findByGenero(genero);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Libro> findByAutor(String autor) {
-		// TODO Auto-generated method stub
-		return null;
+		return libroDao.findByAutor(autor);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+		libroDao.deleteById(id);
 	}
 
 	@Override
-	public void delete(Libro libro) {
-		// TODO Auto-generated method stub
-		
+	@Transactional(readOnly = true)
+	public void save(Libro libro) {
+		libroDao.save(libro);
 	}
 
 }
