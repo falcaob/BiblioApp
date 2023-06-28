@@ -7,11 +7,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 
 @Entity
 @Table(name = "libros")
+@Data
 public class Libro implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -21,66 +26,25 @@ public class Libro implements Serializable {
 	private Long id;
 	
 	@NotEmpty
-	@Size(min = 3, max = 35)
+	@Size(min = 3, max = 50)
 	private String titulo;
 	
 	@NotEmpty
-	@Size(min = 3, max = 25)
+	@Size(min = 3, max = 50)
 	private String autor;
 	
 	@NotEmpty
-	@Size(min = 3, max = 25)
+	@Size(min = 3, max = 50)
 	private Long ejemplares;
 	
 	@NotEmpty
-	@Size(min = 3, max = 15)
+	@Size(min = 3, max = 50)
 	private String genero;
 	
+	@NotNull
+	@Min(value = 0)
+	@Max(value = 100_000)
+	private Double precio;
 	
-	// getters y setters
-	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	public String getAutor() {
-		return autor;
-	}
-
-	public void setAutor(String autor) {
-		this.autor = autor;
-	}
-
-	public Long getEjemplares() {
-		return ejemplares;
-	}
-
-	public void setEjemplares(Long ejemplares) {
-		this.ejemplares = ejemplares;
-	}
-
-	public String getGenero() {
-		return genero;
-	}
-
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 }

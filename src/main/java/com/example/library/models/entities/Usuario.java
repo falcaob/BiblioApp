@@ -16,9 +16,11 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 
 @Entity
 @Table(name = "usuarios")
+@Data
 public class Usuario implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -28,11 +30,11 @@ public class Usuario implements Serializable {
 	private Long id;
 	
 	@NotEmpty
-	@Size(min = 3, max = 10)
+	@Size(min = 3, max = 50)
 	private String nombre;
 	
 	@NotEmpty
-	@Size(min = 3, max = 15)
+	@Size(min = 3, max = 50)
 	private String apellido;
 	
 	@NotEmpty
@@ -43,53 +45,5 @@ public class Usuario implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull
 	private LocalDate fechaNacimiento;
-	
-	
-	// getters and setters
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	public LocalDate getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-
-	public void setFechaNacimiento(LocalDate fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
 
 }
