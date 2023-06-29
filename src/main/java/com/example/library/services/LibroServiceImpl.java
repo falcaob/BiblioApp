@@ -41,13 +41,13 @@ public class LibroServiceImpl implements LibroService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional // métodos void no (readOnly = true)
 	public void delete(Long id) {
 		libroDao.deleteById(id);
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional
 	public void save(Libro libro) {
 		libroDao.save(libro);
 	}
