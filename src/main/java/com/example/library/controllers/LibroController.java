@@ -36,16 +36,7 @@ public class LibroController {
 	@Autowired
 	LibroService libroService;
 	
-	@GetMapping("/home")
-	public String home(Model model) {
-		
-		model.addAttribute("titulo", "¡Bienvenido!");
-		model.addAttribute("titulo1", "Bienvenido a la Biblioteca");
-		model.addAttribute("cabecera", "Pulsa para entrar");
-		
-		return "home";
-	}
-
+	
 	@GetMapping("/listar")
 	public String listar(@RequestParam(defaultValue = "0") int page, Model model) {
 

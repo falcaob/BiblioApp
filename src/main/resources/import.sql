@@ -13,3 +13,19 @@ INSERT INTO libros (titulo, autor, ejemplares, genero, precio, foto) VALUES ('El
 INSERT INTO libros (titulo, autor, ejemplares, genero, precio, foto) VALUES ('El nombre del viento', 'Patrick Rothfuss', 300000, 'Fantasía', 16.99, '');
 INSERT INTO libros (titulo, autor, ejemplares, genero, precio, foto) VALUES ('El retrato de Dorian Gray', 'Oscar Wilde', 700000, 'Clásico', 10.99, '');
 INSERT INTO libros (titulo, autor, ejemplares, genero, precio, foto) VALUES ('El laberinto de los espíritus', 'Carlos Ruiz Zafón', 100000, 'Misterio', 13.99, '');
+
+INSERT INTO usuarios (nombre, apellidos, usuario, email, prestamos) VALUES ('Juan', 'Pérez', 'juanito89', 'juan.perez@example.com', true);
+INSERT INTO usuarios (nombre, apellidos, usuario, email, prestamos) VALUES ('María', 'González', 'mariagonz', 'maria.gonzalez@example.com', false);
+INSERT INTO usuarios (nombre, apellidos, usuario, email, prestamos) VALUES ('Carlos', 'López', 'carlosl', 'carlos.lopez@example.com', true);
+INSERT INTO usuarios (nombre, apellidos, usuario, email, prestamos) VALUES ('Ana', 'Rodríguez', 'anarod', 'ana.rodriguez@example.com', false);
+INSERT INTO usuarios (nombre, apellidos, usuario, email, prestamos) VALUES ('Pedro', 'Martínez', 'pedritom', 'pedro.martinez@example.com', true);
+INSERT INTO usuarios (nombre, apellidos, usuario, email, prestamos) VALUES ('Laura', 'Sánchez', 'lauris', 'laura.sanchez@example.com', false);
+INSERT INTO usuarios (nombre, apellidos, usuario, email, prestamos) VALUES ('Luis', 'Hernández', 'luish', 'luis.hernandez@example.com', true);
+INSERT INTO usuarios (nombre, apellidos, usuario, email, prestamos) VALUES ('Marta', 'López', 'martal', 'marta.lopez@example.com', false);
+INSERT INTO usuarios (nombre, apellidos, usuario, email, prestamos) VALUES ('Daniel', 'Torres', 'danielt', 'daniel.torres@example.com', true);
+INSERT INTO usuarios (nombre, apellidos, usuario, email, prestamos) VALUES ('Sofía', 'García', 'sofiag', 'sofia.garcia@example.com', false);
+INSERT INTO usuarios (nombre, apellidos, usuario, email, prestamos) VALUES ('Diego', 'Ramírez', 'diegor', 'diego.ramirez@example.com', true);
+INSERT INTO usuarios (nombre, apellidos, usuario, email, prestamos) VALUES ('Julia', 'Fernández', 'juliaf', 'julia.fernandez@example.com', false);
+INSERT INTO usuarios (nombre, apellidos, usuario, email, prestamos) VALUES ('Alejandro', 'Gómez', 'alejandrog', 'alejandro.gomez@example.com', true);
+INSERT INTO usuarios (nombre, apellidos, usuario, email, prestamos) VALUES ('Lucía', 'Vargas', 'luciav', 'lucia.vargas@example.com', false);
+INSERT INTO usuarios (nombre, apellidos, usuario, email, prestamos) VALUES ('Roberto', 'Silva', 'robertos', 'roberto.silva@example.com', true);

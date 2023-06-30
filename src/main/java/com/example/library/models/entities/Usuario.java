@@ -35,15 +35,17 @@ public class Usuario implements Serializable {
 	
 	@NotEmpty
 	@Size(min = 3, max = 50)
-	private String apellido;
+	private String apellidos;
+	
+	@NotEmpty
+	@Size(min = 3, max = 50)
+	private String usuario;
 	
 	@NotEmpty
 	@Email
 	private String email;
 	
-	@Column(name = "create_at")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull
-	private LocalDate fechaNacimiento;
+	private boolean prestamos;
 
 }

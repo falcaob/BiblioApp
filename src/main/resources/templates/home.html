@@ -6,9 +6,8 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/style-home.css}"></link>
 </head>
 <body>
-		<h1 th:text="${titulo1}"></h1>
+		<a th:href="@{/libros/listar}"><h2 th:text="${titulo1}"></h2></a>
 		<br> 
-		<a th:href="@{/libros/listar}"><h2 th:text="${cabecera}"></h2></a>
-	</div>
+		<a th:href="@{/usuarios/listar}"><h2 th:text="${titulo2}"></h2></a>
 </body>
 </html>
