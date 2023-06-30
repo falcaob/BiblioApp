@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+* {
+	font-family: monospace;
+	font-size: 30px;
+}
+
+body {
+	background-image: url(../img/icono.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+}

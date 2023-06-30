@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 import com.example.library.models.entities.Libro;
 import com.example.library.services.LibroService;
 
@@ -33,97 +32,152 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/libros")
 public class LibroController {
-	
+
 	@Autowired
 	LibroService libroService;
 	
+	@GetMapping("/home")
+	public String home(Model model) {
+		
+		model.addAttribute("titulo", "¡Bienvenido!");
+		model.addAttribute("titulo1", "Bienvenido a la Biblioteca");
+		model.addAttribute("cabecera", "Pulsa para entrar");
+		
+		return "home";
+	}
+
 	@GetMapping("/listar")
 	public String listar(@RequestParam(defaultValue = "0") int page, Model model) {
-		
+
 		Pageable pageRequest = PageRequest.of(page, 5);
 		Page<Libro> librosListar = libroService.listar(pageRequest);
-		PageRender<Libro> pageRender = new PageRender<>("/libros/listar", librosListar); 
-		
+		PageRender<Libro> pageRender = new PageRender<>("/libros/listar", librosListar);
+
 		model.addAttribute("titulo", "Listado de libros");
 		model.addAttribute("libros", librosListar);
 		model.addAttribute("page", pageRender);
-		
+
 		return "libros/listar-libros";
 	}
-	
+
 	@GetMapping("/id/{id}")
 	public String listarPorId(@PathVariable Long id, @RequestParam(defaultValue = "0") int page, Model model) {
-		
-		List<Libro>librosId = new ArrayList<>();
+
+		List<Libro> librosId = new ArrayList<>();
 		librosId.add(libroService.findById(id));
 		Pageable pageRequest = PageRequest.of(0, 1);
 		Page<Libro> libros = new PageImpl<>(librosId, pageRequest, 1);
-		PageRender<Libro> pageRender = new PageRender<>("/libros/listar", libros); 
+		PageRender<Libro> pageRender = new PageRender<>("/libros/listar", libros);
 
 		model.addAttribute("titulo", "Listado de libros");
 		model.addAttribute("libros", libros);
 		model.addAttribute("page", pageRender);
-		
-        return "libros/listar-libros";
+
+		return "libros/listar-libros";
 	}
-	
+
 	@GetMapping("/autor/{autor}")
 	public String listarPorAutor(@PathVariable String autor, @RequestParam(defaultValue = "0") int page, Model model) {
-		
+
 		Pageable pageRequest = PageRequest.of(page, 5);
 		Page<Libro> libros = libroService.findByAutor(pageRequest, autor);
 		PageRender<Libro> pageRender = new PageRender<>("/libros/listar", libros);
-		
+
 		model.addAttribute("titulo", "Listado de libros por autor");
 		model.addAttribute("libros", libros);
 		model.addAttribute("page", pageRender);
-		
-        return "libros/listar-libros";
+
+		return "libros/listar-libros";
 	}
-	
+
 	@GetMapping("/genero/{genero}")
-	public String listarPorGenero(@PathVariable String genero, @RequestParam(defaultValue = "0") int page, Model model) {
-		
+	public String listarPorGenero(@PathVariable String genero, @RequestParam(defaultValue = "0") int page,
+			Model model) {
+
 		Pageable pageRequest = PageRequest.of(page, 5);
 		Page<Libro> libros = libroService.findByGenero(pageRequest, genero);
 		PageRender<Libro> pageRender = new PageRender<>("/libros/listar", libros);
-		
+
 		model.addAttribute("titulo", "Listado de libros por género");
 		model.addAttribute("libros", libros);
 		model.addAttribute("page", pageRender);
-		
-        return "libros/listar-libros";
+
+		return "libros/listar-libros";
 	}
-	
+
 	@GetMapping("/borrar/{id}")
 	public String borrar(@PathVariable Long id, Model model, RedirectAttributes flash) {
-		
+
 		model.addAttribute("titulo", "Listado de Artículos");
 		libroService.delete(id);
-		model.addAttribute("libros",libroService.listar());
-		
+		model.addAttribute("libros", libroService.listar());
+
 		flash.addFlashAttribute("warning", "Libro borrado con éxito");
-		
+
 		return "redirect:/libros/listar";
 	}
-	
+
 	@GetMapping("/editar/{id}")
 	public String editar(@PathVariable Long id, Model model) {
-		
+
 		model.addAttribute("titulo", "Edición de un libro");
 		model.addAttribute("libro", libroService.findById(id));
 		return "libros/form";
 	}
 	
-	@PostMapping("/form")
-	public String guardar(@Valid Libro libro, BindingResult result, Model model, RedirectAttributes flash) {
+	@GetMapping("/editar")
+	public String editarNav(Model model) {
+
+		model.addAttribute("titulo", "Edición de un libro");
+		model.addAttribute("libro", new Libro());
 		
+		return "libros/form";
+	}
+
+	@PostMapping("/form")
+	public String guardar(@Valid Libro libro, BindingResult result, @RequestParam("file") MultipartFile foto,
+			Model model, RedirectAttributes flash) {
+
 		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Edición de un libro");
-			return "libros/form"; 
+			return "libros/form";
 		}
+
+		// subida de archivos
+		if (!foto.isEmpty()) {
+			Path directorioRecursos = Paths.get("src/main/resources/static/upload");
+			String rootPath = directorioRecursos.toFile().getAbsolutePath();
+			try {
+				byte[] bytes = foto.getBytes();
+				Path rutaCompleta = Paths.get(rootPath + "/" + foto.getOriginalFilename());
+				Files.write(rutaCompleta, bytes);
+				flash.addFlashAttribute("info", "Subido correctamente " + foto.getOriginalFilename());
+				libro.setFoto(foto.getOriginalFilename());
+			} catch (Exception e) {
+
+			}
+		}
+
 		libroService.save(libro);
 		flash.addFlashAttribute("success", "Libro guardado con éxito");
 		return "redirect:listar";
 	}
+
+	@GetMapping("/ver/{id}")
+	public String verPorId(@PathVariable Long id, @RequestParam(defaultValue = "0") int page, Model model,
+			RedirectAttributes flash) {
+
+		Libro libro = libroService.findById(id);
+
+		if (libro == null) {
+			flash.addFlashAttribute("error", "Libro inexistente");
+			return "redirect:/libros/listar";
+		}
+
+		model.addAttribute("titulo", "Mostrando un libro");
+		model.addAttribute("libro", libro);
+
+		return "libros/ver";
+	}
+
 }

@@ -16,7 +16,8 @@
 
 		<h1 class="text-primary" th:text="${titulo}"></h1>
 
-		<form th:action="@{/libros/form}" th:object="${libro}" method="post">
+		<form th:action="@{/libros/form}" th:object="${libro}" method="post"
+			enctype="multipart/form-data">
 
 			<table>
 				<tr>
@@ -55,6 +56,10 @@
 						th:errors="*{precio}" class="form-text text-danger"></small></td>
 				</tr>
 				<tr>
+					<td>Foto</td>
+					<td><input type="file" name="file" class="form-control" /></td>
+				</tr>
+				<tr>
 					<td><input type="submit" value="Guardar"
 						class="btn btn-primary" /></td>
 				</tr>
@@ -63,8 +68,6 @@
 
 			<input type="hidden" th:field="*{id}" />
 		</form>
-
-
 
 	</div>
 	<!-- Script de bootstrap enlazado vía CDN-->

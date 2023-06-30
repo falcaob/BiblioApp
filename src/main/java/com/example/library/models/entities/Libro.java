@@ -47,5 +47,7 @@ public class Libro implements Serializable {
 	@Max(value = 100_000)
 	private Double precio;
 	
+	// subida de archivos
+	private String foto;
 
 }
