@@ -3,6 +3,8 @@ package com.example.library.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,6 +52,24 @@ public class LibroServiceImpl implements LibroService {
 	@Transactional
 	public void save(Libro libro) {
 		libroDao.save(libro);
+	}
+
+	@Override
+	@Transactional
+	public Page<Libro> listar(Pageable pageable) {
+		return libroDao.findAll(pageable);
+	}
+
+	@Override
+	@Transactional
+	public Page<Libro> findByGenero(Pageable pageable, String genero) {
+		return libroDao.findByGenero(pageable, genero);
+	}
+
+	@Override
+	@Transactional
+	public Page<Libro> findByAutor(Pageable pageable, String autor) {
+		return libroDao.findByAutor(pageable, autor);
 	}
 
 }

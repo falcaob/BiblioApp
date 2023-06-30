@@ -33,8 +33,9 @@ public class Libro implements Serializable {
 	@Size(min = 3, max = 50)
 	private String autor;
 	
-	@NotEmpty
-	@Size(min = 3, max = 50)
+	@NotNull
+	@Min(value = 0)
+	@Max(value = 900_000)
 	private Long ejemplares;
 	
 	@NotEmpty
