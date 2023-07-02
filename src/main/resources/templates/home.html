@@ -5,9 +5,11 @@
 <title th:text="${titulo}"></title>
 <link rel="stylesheet" type="text/css" th:href="@{/css/style-home.css}"></link>
 </head>
-<body>
-		<a th:href="@{/libros/listar}"><h2 th:text="${titulo1}"></h2></a>
-		<br> 
-		<a th:href="@{/usuarios/listar}"><h2 th:text="${titulo2}"></h2></a>
+<body>	
+		<div class="contenedor">
+			<h1 class="texto">Bienvenido a la biblioteca</h1>
+			<a th:href="@{/libros/listar}"><h2 th:text="${titulo1}"></h2></a>
+			<a th:href="@{/usuarios/listar}"><h2 th:text="${titulo2}"></h2></a>
+        </div>
 </body>
 </html>

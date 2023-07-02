@@ -41,4 +41,25 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return usuarioDao.findByUsuario(pageable, usuario);
 	}
 
+	@Override
+	@Transactional
+	public Usuario findById(Long id) {
+		// optional
+		return usuarioDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		usuarioDao.deleteById(id);
+		
+	}
+
+	@Override
+	@Transactional
+	public void save(Usuario usuario) {
+		usuarioDao.save(usuario);
+		
+	}
+
 }

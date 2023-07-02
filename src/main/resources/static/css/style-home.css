@@ -1,12 +1,16 @@
 @charset "UTF-8";
 
 * {
-	font-family: monospace;
-	font-size: 30px;
+	font-family: Verdana;
+}
+
+.contenedor {
+	text-align: center;
+	padding-top: 500px;
 }
 
 body {
-	/*background-image: url(../img/icono.png);*/
-	background-repeat: no-repeat;
-	background-size: cover;
-}
+      background-image: url("/img/index.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }

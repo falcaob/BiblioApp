@@ -11,8 +11,8 @@ public class HomeController {
 	public String home(Model model) {
 		
 		model.addAttribute("titulo", "¡Bienvenido!");
-		model.addAttribute("titulo1", "Bienvenido a la Biblioteca");
-		model.addAttribute("titulo2", "Usuarios de la biblioteca");
+		model.addAttribute("titulo1", "Ver listado de libros");
+		model.addAttribute("titulo2", "Ver usuarios de la biblioteca");
 		
 		return "home";
 	}
