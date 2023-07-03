@@ -33,7 +33,7 @@ public class Usuario implements Serializable {
 	private String apellidos;
 	
 	@NotEmpty
-	@Size(min = 3, max = 50)
+	@Size(min = 3, max = 10)
 	private String usuario;
 	
 	@NotEmpty

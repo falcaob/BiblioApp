@@ -10,14 +10,19 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.library.models.entities.Usuario;
 import com.example.library.services.UsuarioService;
 import com.example.library.utils.paginator.PageRender;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -68,6 +73,50 @@ public class UsuarioController {
 		model.addAttribute("page", pageRender);
 
 		return "usuarios/listar-usuarios";
+	}
+	
+	@GetMapping("/borrar/{id}")
+	public String borrar(@PathVariable Long id, Model model, RedirectAttributes flash) {
+
+		model.addAttribute("titulo", "Listado de Artículos");
+		usuarioService.delete(id);
+		model.addAttribute("usuarios", usuarioService.listar());
+
+		flash.addFlashAttribute("warning", "Usuario borrado con éxito");
+
+		return "redirect:/usuarios/listar";
+	}
+	
+	@GetMapping("/editar/{id}")
+	public String editar(@PathVariable Long id, Model model) {
+
+		model.addAttribute("titulo", "Edición de un usuario");
+		model.addAttribute("usuarios", usuarioService.findById(id));
+		return "usuarios/form";
+	}
+	
+	// Usuarios+ del nav
+	@GetMapping("/editar")
+	public String editarNav(Model model) {
+
+		model.addAttribute("titulo", "Edición de un usuario");
+		model.addAttribute("usuarios", new Usuario());
+		
+		return "usuarios/form";
+	}
+	
+	@PostMapping("/form")
+	public String guardar(@Valid Usuario usuario, BindingResult result, Model model, RedirectAttributes flash) {
+		
+		
+		if (result.hasErrors()) {
+			model.addAttribute("usuarios", "Edición de un usuario");
+			return "usuarios/form";
+		}
+		
+		usuarioService.save(usuario);
+		flash.addFlashAttribute("success", "Usuario guardado con éxito");
+		return "redirect:listar";
 	}
 	
 	
