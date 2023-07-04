@@ -16,7 +16,7 @@ import lombok.Data;
 @Entity
 @Table(name = "usuarios")
 @Data
-public class Usuario implements Serializable {
+public class User implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -33,7 +33,7 @@ public class Usuario implements Serializable {
 	private String apellidos;
 	
 	@NotEmpty
-	@Size(min = 3, max = 10)
+	@Size(min = 3, max = 60)
 	private String usuario;
 	
 	@NotEmpty

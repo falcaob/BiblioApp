@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.library.models.entities.Usuario;
+import com.example.library.models.entities.User;
 import com.example.library.services.UsuarioService;
 import com.example.library.utils.paginator.PageRender;
 
@@ -35,8 +35,8 @@ public class UsuarioController {
 	public String listar(@RequestParam(defaultValue = "0") int page, Model model) {
 
 		Pageable pageRequest = PageRequest.of(page, 5);
-		Page<Usuario> usuariosListar = usuarioService.listar(pageRequest);
-		PageRender<Usuario> pageRender = new PageRender<>("/usuarios/listar", usuariosListar);
+		Page<User> usuariosListar = usuarioService.listar(pageRequest);
+		PageRender<User> pageRender = new PageRender<>("/usuarios/listar", usuariosListar);
 
 		model.addAttribute("titulo", "Listado de usuarios");
 		model.addAttribute("usuarios", usuariosListar);
@@ -48,11 +48,11 @@ public class UsuarioController {
 	@GetMapping("/id/{id}")
 	public String listarPorId(@PathVariable Long id, @RequestParam(defaultValue = "0") int page, Model model) {
 
-		List<Usuario> usuariosId = new ArrayList<>();
+		List<User> usuariosId = new ArrayList<>();
 		usuariosId.add(usuarioService.findById(id));
 		Pageable pageRequest = PageRequest.of(0, 1);
-		Page<Usuario> usuarios = new PageImpl<>(usuariosId, pageRequest, 1);
-		PageRender<Usuario> pageRender = new PageRender<>("/usuarios/listar", usuarios);
+		Page<User> usuarios = new PageImpl<>(usuariosId, pageRequest, 1);
+		PageRender<User> pageRender = new PageRender<>("/usuarios/listar", usuarios);
 
 		model.addAttribute("titulo", "Listado de usuarios");
 		model.addAttribute("usuarios", usuarios);
@@ -65,8 +65,8 @@ public class UsuarioController {
 	public String listarPorGenero(@PathVariable String usuario, @RequestParam(defaultValue = "0") int page, Model model) {
 
 		Pageable pageRequest = PageRequest.of(page, 5);
-		Page<Usuario> usuarios = usuarioService.findByUsuario(pageRequest, usuario);
-		PageRender<Usuario> pageRender = new PageRender<>("/usuario/listar", usuarios);
+		Page<User> usuarios = usuarioService.findByUsuario(pageRequest, usuario);
+		PageRender<User> pageRender = new PageRender<>("/usuario/listar", usuarios);
 
 		model.addAttribute("titulo", "Listado de libros por nombre de usuario");
 		model.addAttribute("usuarios", usuarios);
@@ -100,13 +100,13 @@ public class UsuarioController {
 	public String editarNav(Model model) {
 
 		model.addAttribute("titulo", "Edición de un usuario");
-		model.addAttribute("usuarios", new Usuario());
+		model.addAttribute("usuarios", new User());
 		
 		return "usuarios/form";
 	}
 	
 	@PostMapping("/form")
-	public String guardar(@Valid Usuario usuario, BindingResult result, Model model, RedirectAttributes flash) {
+	public String guardar(@Valid User usuario, BindingResult result, Model model, RedirectAttributes flash) {
 		
 		
 		if (result.hasErrors()) {

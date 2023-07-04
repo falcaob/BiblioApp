@@ -8,12 +8,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 
-import com.example.library.models.entities.Usuario;
+import com.example.library.models.entities.User;
 
-public interface UsuarioDao extends PagingAndSortingRepository<Usuario, Long>, CrudRepository<Usuario, Long> {
+public interface UsuarioDao extends PagingAndSortingRepository<User, Long>, CrudRepository<User, Long> {
 	
-	List<Usuario> findByUsuario(String usuario);
+	List<User> findByUsuario(String usuario);
 	
-	Page<Usuario> findByUsuario(Pageable pageable, String usuario);
+	Page<User> findByUsuario(Pageable pageable, String usuario);
 
 }

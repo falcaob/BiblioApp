@@ -6,22 +6,22 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.example.library.models.entities.Libro;
-import com.example.library.models.entities.Usuario;
+import com.example.library.models.entities.User;
 
 public interface UsuarioService {
 
-	List<Usuario> listar();
+	List<User> listar();
 
-	Page<Usuario> listar(Pageable pageable);
+	Page<User> listar(Pageable pageable);
 
-	List<Usuario> findByUsuario(String usuario);
+	List<User> findByUsuario(String usuario);
 
-	Page<Usuario> findByUsuario(Pageable pageable, String usuario);
+	Page<User> findByUsuario(Pageable pageable, String usuario);
 	
-	Usuario findById(Long id);
+	User findById(Long id);
 	
 	void delete(Long id);
 	
-	void save(Usuario usuario);
+	void save(User usuario);
 
 }

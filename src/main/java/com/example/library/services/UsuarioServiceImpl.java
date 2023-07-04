@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.library.models.dao.UsuarioDao;
-import com.example.library.models.entities.Usuario;
+import com.example.library.models.entities.User;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -19,31 +19,31 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Override
 	@Transactional 
-	public List<Usuario> listar() {
-		return (List<Usuario>)usuarioDao.findAll();
+	public List<User> listar() {
+		return (List<User>)usuarioDao.findAll();
 	}
 
 	@Override
 	@Transactional
-	public Page<Usuario> listar(Pageable pageable) {
+	public Page<User> listar(Pageable pageable) {
 		return usuarioDao.findAll(pageable);
 	}
 
 	@Override
 	@Transactional
-	public List<Usuario> findByUsuario(String usuario) {
+	public List<User> findByUsuario(String usuario) {
 		return usuarioDao.findByUsuario(usuario);
 	}
 
 	@Override
 	@Transactional
-	public Page<Usuario> findByUsuario(Pageable pageable, String usuario) {
+	public Page<User> findByUsuario(Pageable pageable, String usuario) {
 		return usuarioDao.findByUsuario(pageable, usuario);
 	}
 
 	@Override
 	@Transactional
-	public Usuario findById(Long id) {
+	public User findById(Long id) {
 		// optional
 		return usuarioDao.findById(id).orElse(null);
 	}
@@ -57,7 +57,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	@Transactional
-	public void save(Usuario usuario) {
+	public void save(User usuario) {
 		usuarioDao.save(usuario);
 		
 	}
